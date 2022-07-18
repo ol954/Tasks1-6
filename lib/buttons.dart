@@ -43,15 +43,20 @@ secondbutton(){//какое колво символов встречается �
   int count=0;
 
   s=s.toLowerCase();
+  //String ns = s;
   for (int i=0;i<s.length;i++){
+
     for(int j=0;j<s.length;j++){
       if ((s[i] == s[j]) & (i!=j)){
         count++;
         j=s.length;
+        //print(s[i]);
+        //print(s.replaceAll(s[i],''));
         s=s.replaceAll(s[i],'');
-
+        //s=ns;
+        i=0;
       }
-      i=0;
+
     }
 
   }
@@ -126,27 +131,59 @@ sixthbutton(){
     indx=k;
     k--;
     var list = [for (var i = 1; i <= n; i++) i];
-    for(int j=1;j<n;j++){
-      if(list.length>k){
-        count=list.indexOf(list.last)-k;
-
-
-
-        list.removeAt(k);//removeat
-        if((count==0) & (list.length>indx-1)){
-          count=indx-1;
+     if (list.length<=k){
+    for (int j = 1; j < n; j++) {
+      if (list.length <= k) {
+        k = indx - count - 1;
+        if (k >= list.length) {
+          bool isbigger = true;
+          while (isbigger == true) {
+            k = k - list.length;
+            if (k < list.length) {
+              isbigger = false;
+            }
+          }
         }
-        k=k+indx-1;
       }
-      if(list.length<=k){
-
-         k=count;
+      if (list.length > k) {
+        count = list.indexOf(list.last) - k;
+        list.removeAt(k);
+        print(k);
+        if ((count == 0) & (list.length > indx - 1)) {
+          count = indx - 1;
+        }
+        k = k + indx - 1;
       }
-
-      getoutput(list.toString());
 
     }
+    }
+     else {
+      for (int j = 1; j < n; j++) {
+        if (list.length > k) {
+          count = list.indexOf(list.last) - k;
+          list.removeAt(k);
+          if ((count == 0) & (list.length > indx - 1)) {
+            count = indx - 1;
+          }
+          k = k + indx - 1;
+        }
+        if (list.length <= k) {
+          k = indx-count-1;
+          if (k>=list.length) {
+            bool isbigger = true;
+            while (isbigger == true){
+            k = k - list.length;
+            if (k < list.length) {
+              isbigger = false;
+            }
+          }
+          }
+        }
 
+
+      }
+    }
+    getoutput(list.toString());
   }
   else{
     getoutput('Некорректный ввод. Корректный ввод: x, y');
